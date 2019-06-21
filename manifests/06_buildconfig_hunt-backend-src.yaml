@@ -1,0 +1,36 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  labels:
+    app: hunt-backend
+  name: hunt-backend-src
+spec:
+  failedBuildsHistoryLimit: 5
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: hunt-backend:src
+  postCommit: {}
+  resources: {}
+  runPolicy: Serial
+  source:
+    git:
+      ref: master
+      uri: https://github.com/vrutkovs/k8s-podhunt
+    type: Git
+  strategy:
+    sourceStrategy:
+      from:
+        kind: ImageStreamTag
+        name: hunt-backend:"golang1.11"
+    type: Source
+  successfulBuildsHistoryLimit: 5
+  triggers:
+  - type: ImageChange
+  - type: ConfigChange
+  - github:
+      secret: dbb3f5b90a1a1283
+    type: GitHub
+status:
+  lastVersion: 17

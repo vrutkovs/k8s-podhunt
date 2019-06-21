@@ -1,0 +1,48 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  labels:
+    app: hunt-backend
+  name: hunt-backend-bin
+  namespace: pod-hunt
+spec:
+  failedBuildsHistoryLimit: 5
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: hunt-backend:bin
+  postCommit: {}
+  resources: {}
+  runPolicy: Serial
+  source:
+    dockerfile: |-
+      FROM centos:7
+      COPY gobinary /usr/local/bin/hunt-backend
+      EXPOSE 8080
+      ENTRYPOINT ["/usr/local/bin/hunt-backend"]
+    images:
+    - as: null
+      from:
+        kind: ImageStreamTag
+        name: hunt-backend:src
+      paths:
+      - destinationDir: .
+        sourcePath: /opt/app-root/gobinary
+    type: Dockerfile
+  strategy:
+    dockerStrategy:
+      from:
+        kind: ImageStreamTag
+        name: hunt-backend:centos7
+    type: Docker
+  successfulBuildsHistoryLimit: 5
+  triggers:
+  - imageChange:
+      from:
+        kind: ImageStreamTag
+        name: hunt-backend:src
+  - type: ConfigChange
+  - type: ImageChange
+status:
+  lastVersion: 8
