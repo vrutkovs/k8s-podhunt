@@ -30,16 +30,15 @@ func inClusterLogin() (*k8s.Clientset, error) {
 }
 
 func getAvailableNamespaces(c *k8s.Clientset) ([]string, error) {
+	log.Println("Fetching available namespaces")
 	nms, err := c.CoreV1().Namespaces().List(metav1.ListOptions{})
-	if err != nil {
+	log.Println("List fetched")
+	if err != nil || nms.Items == nil || len(nms.Items) == 0 {
 		return nil, fmt.Errorf("Failed to list namespaces: %v", err)
 	}
 	namespaces := make([]string, len(nms.Items))
 	for _, n := range nms.Items {
 		namespaces = append(namespaces, n.Name)
-	}
-	if len(namespaces) == 0 {
-		return nil, fmt.Errorf("No available namespaces found")
 	}
 	return namespaces, nil
 }
