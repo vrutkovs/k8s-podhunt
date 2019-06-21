@@ -38,9 +38,10 @@ spec:
     type: Docker
   successfulBuildsHistoryLimit: 5
   triggers:
-  - imageChange:
-      from:
-        kind: ImageStreamTag
-        name: hunt-backend:src
+    - type: ImageChange
+      imageChange:
+        from:
+          kind: ImageStreamTag
+          name: 'hunt-backend:src'
   - type: ConfigChange
   - type: ImageChange

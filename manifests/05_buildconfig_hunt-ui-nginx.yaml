@@ -33,9 +33,10 @@ spec:
     type: Source
   successfulBuildsHistoryLimit: 5
   triggers:
-  - imageChange:
-      from:
-        kind: ImageStreamTag
-        name: pod-hunt:src
+    - type: ImageChange
+      imageChange:
+        from:
+          kind: ImageStreamTag
+          name: 'hunt-ui:src'
     type: ImageChange
   - type: ConfigChange
