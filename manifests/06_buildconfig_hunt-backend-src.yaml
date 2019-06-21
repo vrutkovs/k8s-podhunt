@@ -4,6 +4,7 @@ metadata:
   labels:
     app: hunt-backend
   name: hunt-backend-src
+  namespace: pod-hunt
 spec:
   failedBuildsHistoryLimit: 5
   nodeSelector: null
@@ -23,7 +24,7 @@ spec:
     sourceStrategy:
       from:
         kind: ImageStreamTag
-        name: hunt-backend:"golang1.11"
+        name: hunt-backend:golang1.11
     type: Source
   successfulBuildsHistoryLimit: 5
   triggers:
@@ -32,5 +33,3 @@ spec:
   - github:
       secret: dbb3f5b90a1a1283
     type: GitHub
-status:
-  lastVersion: 17

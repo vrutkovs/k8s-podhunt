@@ -12,12 +12,12 @@ spec:
   - from:
       kind: DockerImage
       name: registry.fedoraproject.org/f29/golang
-    name: "golang1.11"
+    name: golang1.11
     referencePolicy:
       type: Local
   - from:
       kind: DockerImage
-      name: centos:7
-    name: "centos7"
+      name: registry.access.redhat.com/ubi8/ubi
+    name: ubi8
     referencePolicy:
       type: Source

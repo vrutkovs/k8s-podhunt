@@ -11,17 +11,15 @@ spec:
   tags:
   - from:
       kind: DockerImage
-      name: docker.io/centos/nodejs-10-centos7
-    generation: 1
-    importPolicy: {}
-    name: "nodejs10"
+      name: registry.access.redhat.com/ubi8/nodejs-10
+    name: nodejs10
     referencePolicy:
       type: Local
   - from:
       kind: DockerImage
-      name: docker.io/centos/nginx-112-centos7
+      name: registry.access.redhat.com/rhel8/nginx-114
     generation: 1
     importPolicy: {}
-    name: "nginx1.12"
+    name: nginx1.14
     referencePolicy:
       type: Local

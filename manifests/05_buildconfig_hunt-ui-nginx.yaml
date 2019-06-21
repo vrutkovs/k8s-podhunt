@@ -29,7 +29,7 @@ spec:
     sourceStrategy:
       from:
         kind: ImageStreamTag
-        name: "hunt-ui:nginx1.12"
+        name: hunt-ui:nginx1.14
     type: Source
   successfulBuildsHistoryLimit: 5
   triggers:
@@ -39,5 +39,3 @@ spec:
         name: pod-hunt:src
     type: ImageChange
   - type: ConfigChange
-status:
-  lastVersion: 5

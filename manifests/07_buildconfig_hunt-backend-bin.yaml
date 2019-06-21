@@ -17,7 +17,7 @@ spec:
   runPolicy: Serial
   source:
     dockerfile: |-
-      FROM centos:7
+      FROM registry.access.redhat.com/ubi8/ubi
       COPY gobinary /usr/local/bin/hunt-backend
       EXPOSE 8080
       ENTRYPOINT ["/usr/local/bin/hunt-backend"]
@@ -34,7 +34,7 @@ spec:
     dockerStrategy:
       from:
         kind: ImageStreamTag
-        name: hunt-backend:centos7
+        name: hunt-backend:ubi8
     type: Docker
   successfulBuildsHistoryLimit: 5
   triggers:
@@ -44,5 +44,3 @@ spec:
         name: hunt-backend:src
   - type: ConfigChange
   - type: ImageChange
-status:
-  lastVersion: 8
