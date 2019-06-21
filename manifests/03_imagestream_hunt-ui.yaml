@@ -1,0 +1,27 @@
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  name: hunt-ui
+  namespace: pod-hunt
+  labels:
+    app: hunt-ui
+spec:
+  lookupPolicy:
+    local: false
+  tags:
+  - from:
+      kind: DockerImage
+      name: docker.io/centos/nodejs-10-centos7
+    generation: 1
+    importPolicy: {}
+    name: "nodejs0.10"
+    referencePolicy:
+      type: Local
+  - from:
+      kind: DockerImage
+      name: docker.io/centos/nginx-112-centos7
+    generation: 1
+    importPolicy: {}
+    name: "nginx1.12"
+    referencePolicy:
+      type: Local

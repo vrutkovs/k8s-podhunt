@@ -1,0 +1,43 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  labels:
+    app: hunt-ui
+  name: pod-hunt-nginx
+  namespace: pod-hunt
+spec:
+  failedBuildsHistoryLimit: 5
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: hunt-ui:nginx
+  postCommit: {}
+  resources: {}
+  runPolicy: Serial
+  source:
+    images:
+    - as: null
+      from:
+        kind: ImageStreamTag
+        name: hunt-ui:src
+      paths:
+      - destinationDir: .
+        sourcePath: /opt/app-root/src/dist/.
+    type: Image
+  strategy:
+    sourceStrategy:
+      from:
+        kind: ImageStreamTag
+        name: "hunt-ui:nginx1.12"
+    type: Source
+  successfulBuildsHistoryLimit: 5
+  triggers:
+  - imageChange:
+      from:
+        kind: ImageStreamTag
+        name: pod-hunt:src
+    type: ImageChange
+  - type: ConfigChange
+status:
+  lastVersion: 5
