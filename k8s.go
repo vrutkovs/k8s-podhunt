@@ -5,16 +5,14 @@ import (
 	"log"
 	"math/rand"
 	"time"
+	"sort"
 
 	k8s "k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/rest"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
-const (
-  etcdRegExp = ".*etcd.*"
-)
-
+var blackListedNamespaces = []string{"openshift-etcd"}
 
 func inClusterLogin() (*k8s.Clientset, error) {
 	// creates the in-cluster config
@@ -38,7 +36,9 @@ func getAvailableNamespaces(c *k8s.Clientset) ([]string, error) {
 	}
 	namespaces := make([]string, len(nms.Items))
 	for _, n := range nms.Items {
-		namespaces = append(namespaces, n.Name)
+		if sort.SearchStrings(blackListedNamespaces, n.Name) > len(blackListedNamespaces) {
+			namespaces = append(namespaces, n.Name)
+		}
 	}
 	return namespaces, nil
 }
