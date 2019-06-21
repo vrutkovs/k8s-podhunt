@@ -26,6 +26,7 @@ func handleKill(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	log.Println("going to kill something")
 	message := ""
 
 	switch rand.Intn(killOptions) {

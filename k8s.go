@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"math/rand"
 	"time"
 
@@ -26,6 +27,8 @@ func inClusterLogin() (*k8s.Clientset, error) {
 }
 
 func killRandomPod(c *k8s.Clientset) (string, error) {
+	log.Println("Killing random pod")
+
 	// Seed random
 	rand.Seed(time.Now().Unix())
 
@@ -43,10 +46,14 @@ func killRandomPod(c *k8s.Clientset) (string, error) {
 	if err := c.CoreV1().Pods(randomPod.Namespace).Delete(randomPod.Name, &metav1.DeleteOptions{}); err != nil {
 		return "", err
 	}
-	return fmt.Sprintf("Killed pod %s in namespace %s", randomPod.Name, randomPod.Namespace), nil
+	message := fmt.Sprintf("Killed pod %s in namespace %s", randomPod.Name, randomPod.Namespace)
+	log.Println(message)
+	return message, nil
 }
 
 func killRandomDeployment(c *k8s.Clientset) (string, error) {
+	log.Println("Killing random Deployment")
+
 	// Seed random
 	rand.Seed(time.Now().Unix())
 
@@ -64,10 +71,13 @@ func killRandomDeployment(c *k8s.Clientset) (string, error) {
 	if err := c.AppsV1().Deployments(randomDeployment.Namespace).Delete(randomDeployment.Name, &metav1.DeleteOptions{}); err != nil {
 		return "", err
 	}
-	return fmt.Sprintf("Killed deployment %s in namespace %s", randomDeployment.Name, randomDeployment.Namespace), nil
+	message := fmt.Sprintf("Killed deployment %s in namespace %s", randomDeployment.Name, randomDeployment.Namespace)
+	log.Println(message)
+	return message, nil
 }
 
 func killRandomStatefulSet(c *k8s.Clientset) (string, error) {
+	log.Println("Killing random StatefulSet")
 	// Seed random
 	rand.Seed(time.Now().Unix())
 
@@ -85,5 +95,7 @@ func killRandomStatefulSet(c *k8s.Clientset) (string, error) {
 	if err := c.AppsV1().StatefulSets(randomStatefulSet.Namespace).Delete(randomStatefulSet.Name, &metav1.DeleteOptions{}); err != nil {
 		return "", err
 	}
-	return fmt.Sprintf("Killed statefulset %s in namespace %s", randomStatefulSet.Name, randomStatefulSet.Namespace), nil
+	message := fmt.Sprintf("Killed statefulset %s in namespace %s", randomStatefulSet.Name, randomStatefulSet.Namespace)
+	log.Println(message)
+	return message, nil
 }
