@@ -25,6 +25,7 @@ spec:
       from:
         kind: ImageStreamTag
         name: hunt-backend:golang1.11
+      incremental: true
     type: Source
   successfulBuildsHistoryLimit: 5
   triggers:
