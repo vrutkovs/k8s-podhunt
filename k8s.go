@@ -5,7 +5,7 @@ import (
 	"log"
 	"math/rand"
 	"time"
-	"sort"
+	// "sort"
 
 	k8s "k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/rest"
@@ -35,9 +35,9 @@ func getAvailableNamespaces(c *k8s.Clientset) ([]string, error) {
 	}
 	namespaces := make([]string, len(nms.Items))
 	for _, n := range nms.Items {
-		if sort.SearchStrings(blackListedNamespaces, n.Name) > len(blackListedNamespaces) {
-			namespaces = append(namespaces, n.Name)
-		}
+		// if sort.SearchStrings(blackListedNamespaces, n.Name) > len(blackListedNamespaces) {
+		namespaces = append(namespaces, n.Namespace)
+		// }
 	}
 	return namespaces, nil
 }
