@@ -1,0 +1,18 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: ui
+  namespace: pod-hunt
+spec:
+  host: podhunt.apps.vrutkovs-k8s-podhunt.devcluster.openshift.com
+  subdomain: ''
+  to:
+    kind: Service
+    name: ui
+    weight: 100
+  port:
+    targetPort: 8080
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None
