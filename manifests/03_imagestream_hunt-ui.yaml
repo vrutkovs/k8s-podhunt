@@ -14,7 +14,7 @@ spec:
       name: docker.io/centos/nodejs-10-centos7
     generation: 1
     importPolicy: {}
-    name: "nodejs0.10"
+    name: "nodejs10"
     referencePolicy:
       type: Local
   - from:

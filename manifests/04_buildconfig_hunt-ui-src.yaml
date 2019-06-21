@@ -24,7 +24,7 @@ spec:
     sourceStrategy:
       from:
         kind: ImageStreamTag
-        name: "hunt-ui:nodejs0.10"
+        name: "hunt-ui:nodejs10"
     type: Source
   successfulBuildsHistoryLimit: 5
   triggers:
