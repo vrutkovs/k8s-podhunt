@@ -9,6 +9,8 @@ import (
 	"os"
 )
 
+const killOptions = 3
+
 func handleKill(w http.ResponseWriter, r *http.Request) {
 	_, err := io.Copy(os.Stdout, r.Body)
 	if err != nil {
@@ -33,12 +35,8 @@ func handleKill(w http.ResponseWriter, r *http.Request) {
 		message, err = killRandomDeployment(c)
 	case 2:
 		message, err = killRandomStatefulSet(c)
-	case 3:
-		//updateRandomDeployement(c)
-	case 4:
-		//updateRandomStatefulSet(c)
-	case 5:
-		//killRandomWorker(c)
+	default:
+		message, err = killRandomPod(c)
 	}
 	if err != nil {
 		fmt.Fprintf(w, "{'message': '%s'}", message)

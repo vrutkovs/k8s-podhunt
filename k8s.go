@@ -11,7 +11,6 @@ import (
 )
 
 const (
-  killOptions = 3
   etcdRegExp = ".*etcd.*"
 )
 
