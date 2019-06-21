@@ -49,8 +49,11 @@ func killRandomPod(c *k8s.Clientset) (string, error) {
 	if err != nil {
 		return "", fmt.Errorf("Failed to fetch available namespaces: %v", err)
 	}
-	randomNamespace := namespaces[rand.Intn(len(namespaces))]
-	log.Println(fmt.Sprintf("Found random namespace: %s", randomNamespace))
+	log.Println(fmt.Sprintf("namespaces: %v", namespaces))
+	randomNamespaceID := rand.Intn(len(namespaces))
+	log.Println(fmt.Sprintf("Using namespace: %v", randomNamespaceID))
+	randomNamespace := namespaces[randomNamespaceID]
+	log.Println(fmt.Sprintf("Found random namespace: %v", randomNamespace))
 
 	// Find random pod
 	pods, err := c.CoreV1().Pods(randomNamespace).List(metav1.ListOptions{})
