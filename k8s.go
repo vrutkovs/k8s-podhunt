@@ -52,6 +52,7 @@ func killRandomPod(c *k8s.Clientset) (string, error) {
 		return "", err
 	}
 	randomNamespace := namespaces[rand.Intn(len(namespaces))]
+	log.Println(fmt.Sprintf("Found random namespace: %s", randomNamespace))
 
 	// Find random pod
 	pods, err := c.CoreV1().Pods(randomNamespace).List(metav1.ListOptions{})
@@ -80,6 +81,7 @@ func killRandomDeployment(c *k8s.Clientset) (string, error) {
 		return "", err
 	}
 	randomNamespace := namespaces[rand.Intn(len(namespaces))]
+	log.Println(fmt.Sprintf("Found random namespace: %s", randomNamespace))
 
 	// Find random pod
 	deployments, err := c.AppsV1().Deployments(randomNamespace).List(metav1.ListOptions{})
@@ -108,6 +110,7 @@ func killRandomStatefulSet(c *k8s.Clientset) (string, error) {
 		return "", err
 	}
 	randomNamespace := namespaces[rand.Intn(len(namespaces))]
+	log.Println(fmt.Sprintf("Found random namespace: %s", randomNamespace))
 
 	// Find random pod
 	statefulSets, err := c.AppsV1().StatefulSets(randomNamespace).List(metav1.ListOptions{})
