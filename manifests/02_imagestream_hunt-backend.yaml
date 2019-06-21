@@ -21,3 +21,5 @@ spec:
     name: ubi8
     referencePolicy:
       type: Source
+  - name: src
+  - name: bin

@@ -11,7 +11,7 @@ spec:
   output:
     to:
       kind: ImageStreamTag
-      name: hunt-ui:nginx
+      name: hunt-ui:webserver
   postCommit: {}
   resources: {}
   runPolicy: Serial

@@ -23,3 +23,5 @@ spec:
     name: nginx1.12
     referencePolicy:
       type: Local
+  - name: src
+  - name: webserver
