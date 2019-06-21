@@ -41,7 +41,7 @@ func handleKill(w http.ResponseWriter, r *http.Request) {
 	}
 	log.Println(fmt.Sprintf("err: %v, message: %s", err, message))
 	if err == nil {
-		fmt.Fprintf(w, "{'message': '%s'}", message)
+		fmt.Fprintf(w, "{\"message\": \"%s\"}", message)
 	}
 }
 
