@@ -30,7 +30,7 @@ func inClusterLogin() (*k8s.Clientset, error) {
 func getAvailableNamespaces(c *k8s.Clientset) ([]string, error) {
 	log.Println("Fetching available namespaces")
 	nms, err := c.CoreV1().Namespaces().List(metav1.ListOptions{})
-	log.Println("List fetched")
+	log.Println(fmt.Sprintf("List fetched: %v", nms.Items))
 	if err != nil || nms.Items == nil || len(nms.Items) == 0 {
 		return nil, fmt.Errorf("Failed to list namespaces: %v", err)
 	}
