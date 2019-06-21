@@ -32,7 +32,7 @@ func handleKill(w http.ResponseWriter, r *http.Request) {
 	case 1:
 		message, err = killRandomDeployment(c)
 	case 2:
-		//killRandomStatefulSet(c)
+		message, err = killRandomStatefulSet(c)
 	case 3:
 		//updateRandomDeployement(c)
 	case 4:

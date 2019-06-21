@@ -67,3 +67,24 @@ func killRandomDeployment(c *k8s.Clientset) (string, error) {
 	}
 	return fmt.Sprintf("Killed deployment %s in namespace %s", randomDeployment.Name, randomDeployment.Namespace), nil
 }
+
+func killRandomStatefulSet(c *k8s.Clientset) (string, error) {
+	// Seed random
+	rand.Seed(time.Now().Unix())
+
+	// Find random pod
+	statefulSets, err := c.AppsV1().StatefulSets("").List(metav1.ListOptions{})
+	if err != nil {
+		return "", err
+	}
+	if statefulSets.Items == nil || len(statefulSets.Items) == 0 {
+		return "", fmt.Errorf("No Stateful Sets fetched")
+	}
+	randomStatefulSet := statefulSets.Items[rand.Intn(len(statefulSets.Items))]
+
+	// Kill kill kill
+	if err := c.AppsV1().StatefulSets(randomStatefulSet.Namespace).Delete(randomStatefulSet.Name, &metav1.DeleteOptions{}); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("Killed statefulset %s in namespace %s", randomStatefulSet.Name, randomStatefulSet.Namespace), nil
+}
