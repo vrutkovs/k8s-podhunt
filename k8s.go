@@ -32,7 +32,7 @@ func getAvailableNamespaces(c *k8s.Clientset) ([]string, error) {
 	nms, err := c.CoreV1().Namespaces().List(metav1.ListOptions{})
 	log.Println(fmt.Sprintf("List fetched: %v", nms.Items))
 	if err != nil || nms.Items == nil || len(nms.Items) == 0 {
-		return nil, fmt.Errorf("Failed to list namespaces: %v", err)
+		return []string{}, fmt.Errorf("Failed to list namespaces: %v", err)
 	}
 	namespaces := make([]string, len(nms.Items))
 	for _, n := range nms.Items {
