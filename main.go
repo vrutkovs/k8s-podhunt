@@ -39,7 +39,7 @@ func handleKill(w http.ResponseWriter, r *http.Request) {
 	default:
 		message, err = killRandomPod(c)
 	}
-	log.Println("err: %v, message: %s", err, message)
+	fmt.Fprintf(os.Stdout, "err: %v, message: %s", err, message)
 	if err != nil {
 		fmt.Fprintf(w, "{'message': '%s'}", message)
 	}
