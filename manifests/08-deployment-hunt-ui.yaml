@@ -1,14 +1,15 @@
 apiVersion: apps.openshift.io/v1
 kind: DeploymentConfig
 metadata:
-  labels:
-    app: hunt-ui
-  name: hunt-ui
-  namespace: pod-hunt
   annotations:
     image.openshift.io/triggers: |
       [
         {"from":{"kind":"ImageStreamTag","name":"hunt-ui:webserver"},"fieldPath":"spec.template.spec.containers[?(@.name==\"hunt-ui\")].image"}
+      ]
+  labels:
+    app: hunt-ui
+  name: hunt-ui
+  namespace: pod-hunt
 spec:
   replicas: 1
   selector:
@@ -50,7 +51,7 @@ spec:
     - imageChangeParams:
         automatic: true
         containerNames:
-          - pod-hunt
+          - hunt-ui
         from:
           kind: ImageStreamTag
           name: 'hunt-ui:webserver'

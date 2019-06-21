@@ -5,6 +5,7 @@ metadata:
     image.openshift.io/triggers: |
       [
         {"from":{"kind":"ImageStreamTag","name":"hunt-backend:bin"},"fieldPath":"spec.template.spec.containers[?(@.name==\"hunt-backend\")].image"}
+      ]
   labels:
     app: hunt-backend
   name: hunt-backend
