@@ -44,5 +44,26 @@ func killRandomPod(c *k8s.Clientset) (string, error) {
 	if err := c.CoreV1().Pods(randomPod.Namespace).Delete(randomPod.Name, &metav1.DeleteOptions{}); err != nil {
 		return "", err
 	}
-	return fmt.Sprintf("Killed %s in %s namespace", randomPod.Name, randomPod.Namespace), nil
+	return fmt.Sprintf("Killed pod %s in %s namespace", randomPod.Name, randomPod.Namespace), nil
+}
+
+func killRandomDeployment(c *k8s.Clientset) (string, error) {
+	// Seed random
+	rand.Seed(time.Now().Unix())
+
+	// Find random pod
+	deployments, err := c.AppsV1().Deployments("").List(metav1.ListOptions{})
+	if err != nil {
+		return "", err
+	}
+	if deployments.Items == nil || len(deployments.Items) == 0 {
+		return "", fmt.Errorf("No deployments fetched")
+	}
+	randomDeployment := deployments.Items[rand.Intn(len(deployments.Items))]
+
+	// Kill kill kill
+	if err := c.AppsV1().Deployments(randomDeployment.Namespace).Delete(randomDeployment.Name, &metav1.DeleteOptions{}); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("Killed deployment %s in %s namespace", randomDeployment.Name, randomDeployment.Namespace), nil
 }
