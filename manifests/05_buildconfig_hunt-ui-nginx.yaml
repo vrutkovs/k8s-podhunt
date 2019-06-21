@@ -29,7 +29,7 @@ spec:
     sourceStrategy:
       from:
         kind: ImageStreamTag
-        name: hunt-ui:nginx1.14
+        name: hunt-ui:nginx1.12
     type: Source
   successfulBuildsHistoryLimit: 5
   triggers:
