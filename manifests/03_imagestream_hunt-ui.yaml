@@ -18,10 +18,12 @@ spec:
   - from:
       kind: DockerImage
       name: docker.io/centos/nginx-112-centos7
-    generation: 1
-    importPolicy: {}
     name: nginx1.12
     referencePolicy:
       type: Local
   - name: src
+    referencePolicy:
+      type: Source
   - name: webserver
+    referencePolicy:
+      type: Source

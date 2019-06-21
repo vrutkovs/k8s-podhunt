@@ -22,4 +22,8 @@ spec:
     referencePolicy:
       type: Source
   - name: src
+    referencePolicy:
+      type: Source
   - name: bin
+    referencePolicy:
+      type: Source
