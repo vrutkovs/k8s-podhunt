@@ -22,15 +22,15 @@ func inClusterLogin() (*k8s.Clientset, error) {
 	if err != nil {
 		return nil, err
 	}
+	// Seed random
+	rand.Seed(time.Now().Unix())
+
 	// creates the clientset
 	return k8s.NewForConfig(config)
 }
 
 func killRandomPod(c *k8s.Clientset) (string, error) {
 	log.Println("Killing random pod")
-
-	// Seed random
-	rand.Seed(time.Now().Unix())
 
 	// Find random pod
 	pods, err := c.CoreV1().Pods("").List(metav1.ListOptions{})
@@ -54,9 +54,6 @@ func killRandomPod(c *k8s.Clientset) (string, error) {
 func killRandomDeployment(c *k8s.Clientset) (string, error) {
 	log.Println("Killing random Deployment")
 
-	// Seed random
-	rand.Seed(time.Now().Unix())
-
 	// Find random pod
 	deployments, err := c.AppsV1().Deployments("").List(metav1.ListOptions{})
 	if err != nil {
@@ -78,8 +75,6 @@ func killRandomDeployment(c *k8s.Clientset) (string, error) {
 
 func killRandomStatefulSet(c *k8s.Clientset) (string, error) {
 	log.Println("Killing random StatefulSet")
-	// Seed random
-	rand.Seed(time.Now().Unix())
 
 	// Find random pod
 	statefulSets, err := c.AppsV1().StatefulSets("").List(metav1.ListOptions{})
