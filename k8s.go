@@ -49,11 +49,7 @@ func killRandomPod(c *k8s.Clientset) (string, error) {
 	if err != nil {
 		return "", fmt.Errorf("Failed to fetch available namespaces: %v", err)
 	}
-	log.Println(fmt.Sprintf("namespaces: %v", namespaces))
-	randomNamespaceID := rand.Intn(len(namespaces))
-	log.Println(fmt.Sprintf("Using namespace: %v", randomNamespaceID))
-	randomNamespace := namespaces[randomNamespaceID]
-	log.Println(fmt.Sprintf("Found random namespace: %v", randomNamespace))
+	randomNamespace := namespaces[rand.Intn(len(namespaces))]
 
 	// Find random pod
 	pods, err := c.CoreV1().Pods(randomNamespace).List(metav1.ListOptions{})
@@ -69,7 +65,7 @@ func killRandomPod(c *k8s.Clientset) (string, error) {
 	if err := c.CoreV1().Pods(randomPod.Namespace).Delete(randomPod.Name, &metav1.DeleteOptions{}); err != nil {
 		return "", fmt.Errorf("Failed to kill pods: %v", err)
 	}
-	message := fmt.Sprintf("Killed pod %s in namespace %s", randomPod.Name, randomNamespace)
+	message := fmt.Sprintf("Killed pod %s in namespace %s", randomPod.Name, randomPod.Namespace)
 	log.Println(message)
 	return message, nil
 }
@@ -82,7 +78,6 @@ func killRandomDeployment(c *k8s.Clientset) (string, error) {
 		return "", fmt.Errorf("Failed to fetch available namespaces: %v", err)
 	}
 	randomNamespace := namespaces[rand.Intn(len(namespaces))]
-	log.Println(fmt.Sprintf("Found random namespace: %s", randomNamespace))
 
 	// Find random pod
 	deployments, err := c.AppsV1().Deployments(randomNamespace).List(metav1.ListOptions{})
@@ -98,7 +93,7 @@ func killRandomDeployment(c *k8s.Clientset) (string, error) {
 	if err := c.AppsV1().Deployments(randomDeployment.Namespace).Delete(randomDeployment.Name, &metav1.DeleteOptions{}); err != nil {
 		return "", fmt.Errorf("Failed to delete deployment: %v", err)
 	}
-	message := fmt.Sprintf("Killed deployment %s in namespace %s", randomDeployment.Name, randomNamespace)
+	message := fmt.Sprintf("Killed deployment %s in namespace %s", randomDeployment.Name, randomDeployment.Namespace)
 	log.Println(message)
 	return message, nil
 }
@@ -111,7 +106,6 @@ func killRandomStatefulSet(c *k8s.Clientset) (string, error) {
 		return "", fmt.Errorf("Failed to list available namespaces: %v", err)
 	}
 	randomNamespace := namespaces[rand.Intn(len(namespaces))]
-	log.Println(fmt.Sprintf("Found random namespace: %s", randomNamespace))
 
 	// Find random pod
 	statefulSets, err := c.AppsV1().StatefulSets(randomNamespace).List(metav1.ListOptions{})
@@ -127,7 +121,7 @@ func killRandomStatefulSet(c *k8s.Clientset) (string, error) {
 	if err := c.AppsV1().StatefulSets(randomStatefulSet.Namespace).Delete(randomStatefulSet.Name, &metav1.DeleteOptions{}); err != nil {
 		return "", fmt.Errorf("Failed to kill statefulset: %v", err)
 	}
-	message := fmt.Sprintf("Killed statefulset %s in namespace %s", randomStatefulSet.Name, namespaces)
+	message := fmt.Sprintf("Killed statefulset %s in namespace %s", randomStatefulSet.Name, randomStatefulSet.Namespace)
 	log.Println(message)
 	return message, nil
 }
