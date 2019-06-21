@@ -40,7 +40,7 @@ func handleKill(w http.ResponseWriter, r *http.Request) {
 		message, err = killRandomPod(c)
 	}
 	log.Println(fmt.Sprintf("err: %v, message: %s", err, message))
-	if err != nil {
+	if err == nil {
 		fmt.Fprintf(w, "{'message': '%s'}", message)
 	}
 }
