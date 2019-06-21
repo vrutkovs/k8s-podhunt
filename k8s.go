@@ -38,6 +38,9 @@ func getAvailableNamespaces(c *k8s.Clientset) ([]string, error) {
 	for _, n := range nms.Items {
 		namespaces = append(namespaces, n.Name)
 	}
+	if len(namespaces) == 0 {
+		return nil, fmt.Errorf("No available namespaces found")
+	}
 	return namespaces, nil
 }
 
