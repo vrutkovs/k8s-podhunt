@@ -3,93 +3,27 @@ module github.com/vrutkovs/k8s-podhunt
 go 1.12
 
 require (
-	9fans.net/go v0.0.2 // indirect
-	cloud.google.com/go v0.40.0 // indirect
-	github.com/OpenPeeDeeP/depguard v0.0.0-20181229194401-1f388ab2d810 // indirect
-	github.com/StackExchange/wmi v0.0.0-20190523213315-cbe66965904d // indirect
-	github.com/alecthomas/gometalinter v3.0.0+incompatible // indirect
-	github.com/coreos/bbolt v1.3.3 // indirect
-	github.com/coreos/etcd v3.3.13+incompatible // indirect
-	github.com/coreos/go-semver v0.3.0 // indirect
-	github.com/coreos/go-systemd v0.0.0-20190620071333-e64a0ec8b42a // indirect
-	github.com/docker/spdystream v0.0.0-20160310174837-449fdfce4d96 // indirect
-	github.com/elazarl/goproxy v0.0.0-20170405201442-c4fc26588b6e // indirect
-	github.com/evanphx/json-patch v0.0.0-20190203023257-5858425f7550 // indirect
-	github.com/fatih/gomodifytags v0.0.0-20190517204355-df91c5bc7551 // indirect
-	github.com/go-critic/go-critic v0.3.4 // indirect
-	github.com/go-ole/go-ole v1.2.4 // indirect
-	github.com/golang/mock v1.3.1 // indirect
-	github.com/golangci/errcheck v0.0.0-20181223084120-ef45e06d44b6 // indirect
-	github.com/golangci/go-tools v0.0.0-20190124090046-35a9f45a5db0 // indirect
-	github.com/golangci/gocyclo v0.0.0-20180528144436-0a533e8fa43d // indirect
-	github.com/golangci/gofmt v0.0.0-20181222123516-0b8337e80d98 // indirect
-	github.com/golangci/golangci-lint v1.17.1 // indirect
-	github.com/golangci/gosec v0.0.0-20180901114220-8afd9cbb6cfb // indirect
-	github.com/golangci/lint-1 v0.0.0-20181222135242-d2cdd8c08219 // indirect
-	github.com/golangci/revgrep v0.0.0-20180812185044-276a5c0a1039 // indirect
+	github.com/gogo/protobuf v1.2.1 // indirect
 	github.com/google/gofuzz v0.0.0-20170612174753-24818f796faf // indirect
-	github.com/google/pprof v0.0.0-20190515194954-54271f7e092f // indirect
-	github.com/google/shlex v0.0.0-20181106134648-c34317bd91bf // indirect
-	github.com/google/uuid v1.0.0 // indirect
-	github.com/googleapis/gax-go/v2 v2.0.5 // indirect
 	github.com/googleapis/gnostic v0.3.0 // indirect
-	github.com/gostaticanalysis/analysisutil v0.0.0-20190329151158-56bca42c7635 // indirect
-	github.com/grpc-ecosystem/grpc-gateway v1.9.2 // indirect
-	github.com/kisielk/errcheck v1.2.0 // indirect
-	github.com/klauspost/compress v1.7.1 // indirect
-	github.com/klauspost/cpuid v1.2.1 // indirect
-	github.com/konsorten/go-windows-terminal-sequences v1.0.2 // indirect
-	github.com/kr/pty v1.1.5 // indirect
-	github.com/logrusorgru/aurora v0.0.0-20190428105938-cea283e61946 // indirect
-	github.com/magiconair/properties v1.8.1 // indirect
-	github.com/mdempsky/gocode v0.0.0-20190203001940-7fb65232883f // indirect
-	github.com/mgechev/revive v0.0.0-20190619233030-602438bd4bbc // indirect
-	github.com/mxk/go-flowrate v0.0.0-20140419014527-cca7078d478f // indirect
-	github.com/nbutton23/zxcvbn-go v0.0.0-20180912185939-ae427f1e4c1d // indirect
-	github.com/onsi/ginkgo v1.8.0 // indirect
-	github.com/onsi/gomega v1.5.0 // indirect
-	github.com/pelletier/go-toml v1.4.0 // indirect
-	github.com/prometheus/common v0.6.0 // indirect
-	github.com/ramya-rao-a/go-outline v0.0.0-20181122025142-7182a932836a // indirect
-	github.com/rogpeppe/fastuuid v1.1.0 // indirect
-	github.com/rogpeppe/godef v1.1.1 // indirect
-	github.com/russross/blackfriday v2.0.0+incompatible // indirect
-	github.com/shirou/gopsutil v2.18.12+incompatible // indirect
-	github.com/shurcooL/go v0.0.0-20190330031554-6713ea532688 // indirect
-	github.com/sirupsen/logrus v1.4.2 // indirect
-	github.com/spf13/cobra v0.0.5 // indirect
-	github.com/spf13/jwalterweatherman v1.1.0 // indirect
-	github.com/spf13/viper v1.4.0 // indirect
-	github.com/sqs/goreturns v0.0.0-20181028201513-538ac6014518 // indirect
-	github.com/stretchr/objx v0.2.0 // indirect
-	github.com/tpng/gopkgs v0.0.0-20180428091733-81e90e22e204 // indirect
-	github.com/ugorji/go v1.1.5-pre // indirect
-	github.com/valyala/fasthttp v1.3.0 // indirect
-	github.com/zmb3/goaddimport v0.0.0-20170810013102-4ab94a07ab86 // indirect
-	github.com/zmb3/gogetdoc v0.0.0-20190228002656-b37376c5da6a // indirect
-	go.etcd.io/bbolt v1.3.3 // indirect
-	go.opencensus.io v0.22.0 // indirect
+	github.com/json-iterator/go v1.1.6 // indirect
+	github.com/kr/pretty v0.1.0 // indirect
+	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
+	github.com/modern-go/reflect2 v1.0.1 // indirect
+	github.com/spf13/pflag v1.0.3 // indirect
 	golang.org/x/crypto v0.0.0-20190618222545-ea8f1a30c443 // indirect
-	golang.org/x/exp v0.0.0-20190510132918-efd6b22b2522 // indirect
-	golang.org/x/image v0.0.0-20190618124811-92942e4437e2 // indirect
-	golang.org/x/mobile v0.0.0-20190607214518-6fa95d984e88 // indirect
-	golang.org/x/mod v0.1.0 // indirect
 	golang.org/x/net v0.0.0-20190620200207-3b0461eec859 // indirect
+	golang.org/x/oauth2 v0.0.0-20190604053449-0f29369cfe45 // indirect
 	golang.org/x/sys v0.0.0-20190621062556-bf70e4678053 // indirect
-	golang.org/x/tools v0.0.0-20190620191750-1fa568393b23 // indirect
+	golang.org/x/time v0.0.0-20190308202827-9d24e82272b4 // indirect
 	google.golang.org/appengine v1.6.1 // indirect
-	google.golang.org/genproto v0.0.0-20190620144150-6af8c5fc6601 // indirect
-	google.golang.org/grpc v1.21.1 // indirect
-	gopkg.in/alecthomas/kingpin.v3-unstable v3.0.0-20180810215634-df19058c872c // indirect
+	gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127 // indirect
 	gopkg.in/inf.v0 v0.9.0 // indirect
-	honnef.co/go/tools v0.0.0-20190614002413-cb51c254f01b // indirect
+	gopkg.in/yaml.v2 v2.2.2 // indirect
 	k8s.io/api v0.0.0-20190313235455-40a48860b5ab // indirect
 	k8s.io/apimachinery v0.0.0-20190313205120-d7deff9243b1
 	k8s.io/client-go v11.0.0+incompatible
 	k8s.io/klog v0.3.3 // indirect
-	k8s.io/kube-openapi v0.0.0-20190228160746-b3a7cee44a30 // indirect
 	k8s.io/utils v0.0.0-20190607212802-c55fbcfc754a // indirect
-	mvdan.cc/unparam v0.0.0-20190310220240-1b9ccfa71afe // indirect
 	sigs.k8s.io/yaml v1.1.0 // indirect
-	sourcegraph.com/sqs/pbtypes v1.0.0 // indirect
 )
