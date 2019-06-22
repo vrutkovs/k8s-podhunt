@@ -11,7 +11,7 @@ spec:
   output:
     to:
       kind: ImageStreamTag
-      name: hunt-ui:webserver
+      name: "hunt-ui:webserver"
   postCommit: {}
   resources: {}
   runPolicy: Serial
@@ -20,7 +20,7 @@ spec:
     - as: null
       from:
         kind: ImageStreamTag
-        name: hunt-ui:src
+        name: "hunt-ui:src"
       paths:
       - destinationDir: .
         sourcePath: /opt/app-root/src/dist/.
@@ -29,14 +29,15 @@ spec:
     sourceStrategy:
       from:
         kind: ImageStreamTag
-        name: hunt-ui:nginx1.12
+        name: "hunt-ui:nginx1.12"
     type: Source
   successfulBuildsHistoryLimit: 5
   triggers:
-    - type: ImageChange
-      imageChange:
-        from:
-          kind: ImageStreamTag
-          name: 'hunt-ui:src'
+  - type: ImageChange
+  - type: ImageChange
+    imageChange:
+      from:
+        kind: "ImageStreamTag"
+        name: "hunt-ui:src"
     type: ImageChange
   - type: ConfigChange

@@ -11,7 +11,7 @@ spec:
   output:
     to:
       kind: ImageStreamTag
-      name: hunt-backend:bin
+      name: "hunt-backend:bin"
   postCommit: {}
   resources: {}
   runPolicy: Serial
@@ -25,7 +25,7 @@ spec:
     - as: null
       from:
         kind: ImageStreamTag
-        name: hunt-backend:src
+        name: "hunt-backend:src"
       paths:
       - destinationDir: .
         sourcePath: /opt/app-root/gobinary
@@ -34,14 +34,14 @@ spec:
     dockerStrategy:
       from:
         kind: ImageStreamTag
-        name: hunt-backend:ubi8
+        name: "hunt-backend:ubi8"
     type: Docker
   successfulBuildsHistoryLimit: 5
   triggers:
-    - type: ImageChange
-      imageChange:
-        from:
-          kind: ImageStreamTag
-          name: 'hunt-backend:src'
+  - type: ImageChange
+    imageChange:
+      from:
+        kind: ImageStreamTag
+        name: "hunt-backend:src"
   - type: ConfigChange
   - type: ImageChange
