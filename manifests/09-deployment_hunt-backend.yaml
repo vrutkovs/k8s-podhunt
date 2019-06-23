@@ -1,11 +1,6 @@
 apiVersion: apps.openshift.io/v1
 kind: DeploymentConfig
 metadata:
-  annotations:
-    image.openshift.io/triggers: |
-      [
-        {"from":{"kind":"ImageStreamTag","name":"hunt-backend:latest"},"fieldPath":"spec.template.spec.containers[?(@.name==\"hunt-backend\")].image"}
-      ]
   labels:
     component: backend
   name: hunt-backend
@@ -32,7 +27,7 @@ spec:
         app: pod-hunt
     spec:
       containers:
-        - image: 'image-registry.openshift-image-registry.svc:5000/pod-hunt/hunt-backend:bin'
+        - image: 'hunt-backend:bin'
           imagePullPolicy: Always
           name: hunt-backend
           ports:
