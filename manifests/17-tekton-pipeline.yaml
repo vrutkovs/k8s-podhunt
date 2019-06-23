@@ -32,19 +32,19 @@ spec:
       value: start-build hunt-backend-bin --wait
     runAfter:
     - build-backend-src
-  - name: rollout-ui
+  - name: wait-for-ui-rollout
     taskRef:
       name: openshift-client
     params:
     - name: ARGS
-      value: rollout latest hunt-ui
+      value: rollout status dc/hunt-ui
     runAfter:
     - build-ui-bin
-  - name: rollout-backend
+  - name: wait-for-backend-rollout
     taskRef:
       name: openshift-client
     params:
     - name: ARGS
-      value: rollout latest hunt-backend
+      value: rollout status dc/hunt-backend
     runAfter:
     - build-backend-bin

@@ -27,7 +27,7 @@ spec:
         app: pod-hunt
     spec:
       containers:
-        - image: 'hunt-backend:bin'
+        - image: ''
           imagePullPolicy: Always
           name: hunt-backend
           ports:
@@ -45,4 +45,12 @@ spec:
       terminationGracePeriodSeconds: 30
   test: false
   triggers:
+  - type: "ImageChange"
+    imageChangeParams:
+      automatic: true
+      from:
+        kind: "ImageStreamTag"
+        name: "hunt-backend:bin"
+      containerNames:
+        - "hunt-backend"
   - type: ConfigChange

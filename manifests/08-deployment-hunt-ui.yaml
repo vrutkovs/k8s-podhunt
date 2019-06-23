@@ -27,7 +27,7 @@ spec:
         app: pod-hunt
     spec:
       containers:
-        - image: 'hunt-ui:webserver'
+        - image: ''
           imagePullPolicy: Always
           name: hunt-ui
           ports:
@@ -44,3 +44,11 @@ spec:
   test: false
   triggers:
   - type: ConfigChange
+  - type: "ImageChange"
+    imageChangeParams:
+      automatic: true
+      from:
+        kind: "ImageStreamTag"
+        name: "hunt-ui:webserver"
+      containerNames:
+        - "hunt-ui"
