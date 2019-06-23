@@ -35,7 +35,7 @@ func getAvailableNamespaces(c *k8s.Clientset) ([]string, error) {
 	}
 	namespaces := make([]string, len(nms.Items))
 	for _, n := range nms.Items {
-		if sort.SearchStrings(blackListedNamespaces, n.Name) > len(blackListedNamespaces) {
+		if sort.SearchStrings(blackListedNamespaces, n.Namespace) >= len(blackListedNamespaces) {
 			namespaces = append(namespaces, n.Namespace)
 		}
 	}
