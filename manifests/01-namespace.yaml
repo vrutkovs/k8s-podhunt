@@ -4,5 +4,3 @@ metadata:
   name: pod-hunt
   annotations:
     openshift.io/node-selector: ""
-  labels:
-    name: pod-hunt

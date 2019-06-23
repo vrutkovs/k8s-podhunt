@@ -2,8 +2,8 @@ apiVersion: build.openshift.io/v1
 kind: BuildConfig
 metadata:
   labels:
-    app: hunt-backend
-  name: hunt-backend
+    component: backend
+  name: hunt-backend-src
   namespace: pod-hunt
 spec:
   failedBuildsHistoryLimit: 5

@@ -4,7 +4,7 @@ metadata:
   name: hunt-ui
   namespace: pod-hunt
   labels:
-    app: hunt-ui
+    component: ui
 spec:
   lookupPolicy:
     local: false

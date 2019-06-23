@@ -2,7 +2,7 @@ apiVersion: build.openshift.io/v1
 kind: BuildConfig
 metadata:
   labels:
-    app: hunt-ui
+    component: ui
   name: hunt-ui-src
   namespace: pod-hunt
 spec:

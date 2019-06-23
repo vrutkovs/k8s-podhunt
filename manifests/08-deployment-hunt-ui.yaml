@@ -7,7 +7,7 @@ metadata:
         {"from":{"kind":"ImageStreamTag","name":"hunt-ui:webserver"},"fieldPath":"spec.template.spec.containers[?(@.name==\"hunt-ui\")].image"}
       ]
   labels:
-    app: hunt-ui
+    component: backend
   name: hunt-ui
   namespace: pod-hunt
 spec:
@@ -28,7 +28,6 @@ spec:
     metadata:
       creationTimestamp: null
       labels:
-        app: pod-hunt
         deploymentconfig: hunt-ui
     spec:
       containers:

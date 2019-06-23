@@ -3,6 +3,8 @@ apiVersion: route.openshift.io/v1
 metadata:
   name: ui
   namespace: pod-hunt
+  labels:
+    component: ui
 spec:
   to:
     kind: Service

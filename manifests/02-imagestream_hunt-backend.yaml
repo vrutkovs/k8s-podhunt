@@ -4,7 +4,7 @@ metadata:
   name: hunt-backend
   namespace: pod-hunt
   labels:
-    app: hunt-backend
+    component: backend
 spec:
   lookupPolicy:
     local: false
