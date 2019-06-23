@@ -25,5 +25,4 @@ spec:
         name: hunt-ui:nodejs
     type: Source
   triggers:
-  - type: ImageChange
   - type: ConfigChange

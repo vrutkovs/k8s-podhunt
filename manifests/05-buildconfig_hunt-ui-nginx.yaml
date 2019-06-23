@@ -3,7 +3,7 @@ kind: BuildConfig
 metadata:
   labels:
     app: hunt-ui
-  name: hunt-ui-nginx
+  name: hunt-ui-bin
   namespace: pod-hunt
 spec:
   output:
@@ -28,10 +28,4 @@ spec:
         name: "hunt-ui:nginx"
     type: Source
   triggers:
-  - type: ImageChange
-  - imageChange:
-      from:
-        kind: "ImageStreamTag"
-        name: "hunt-ui:src"
-    type: ImageChange
   - type: ConfigChange

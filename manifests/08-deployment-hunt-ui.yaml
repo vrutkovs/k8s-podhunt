@@ -32,7 +32,7 @@ spec:
         deploymentconfig: hunt-ui
     spec:
       containers:
-        - image: ''
+        - image: 'image-registry.openshift-image-registry.svc:5000/pod-hunt/hunt-ui:bin'
           imagePullPolicy: Always
           name: hunt-ui
           ports:
@@ -48,12 +48,4 @@ spec:
       terminationGracePeriodSeconds: 30
   test: false
   triggers:
-    - imageChangeParams:
-        automatic: true
-        containerNames:
-          - hunt-ui
-        from:
-          kind: ImageStreamTag
-          name: 'hunt-ui:webserver'
-      type: ImageChange
-    - type: ConfigChange
+  - type: ConfigChange

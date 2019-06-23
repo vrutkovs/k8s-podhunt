@@ -1,0 +1,56 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Pipeline
+metadata:
+  name: pod-hunt
+spec:
+  tasks:
+  - name: build-ui-src
+    taskRef:
+      name: openshift-client
+    resources:
+      inputs:
+        - name: ARGS
+          value: start-build hunt-ui-src --wait
+  - name: build-ui-bin
+    taskRef:
+      name: openshift-client
+    resources:
+      inputs:
+        - name: ARGS
+          value: start-build hunt-ui-bin --wait
+    runAfter:
+    - build-ui-src
+  - name: build-backend-src
+    taskRef:
+      name: openshift-client
+    resources:
+      inputs:
+        - name: ARGS
+          value: start-build hunt-backend-src --wait
+  - name: build-backend-bin
+    taskRef:
+      name: openshift-client
+    resources:
+      inputs:
+        - name: ARGS
+          value: start-build hunt-backend-bin --wait
+    runAfter:
+    - build-backend-src
+  - name: rollout-ui
+    taskRef:
+      name: openshift-client
+    resources:
+      inputs:
+        - name: ARGS
+          value: rollout latest hunt-ui
+    runAfter:
+    - build-ui-bin
+  - name: rollout-backend
+    taskRef:
+      name: openshift-client
+    resources:
+      inputs:
+        - name: ARGS
+          value: rollout latest hunt-backend
+    runAfter:
+    - build-backend-bin
