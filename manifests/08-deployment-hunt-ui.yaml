@@ -29,6 +29,7 @@ spec:
       creationTimestamp: null
       labels:
         deploymentconfig: hunt-ui
+        app: pod-hunt
     spec:
       containers:
         - image: 'image-registry.openshift-image-registry.svc:5000/pod-hunt/hunt-ui:webserver'
