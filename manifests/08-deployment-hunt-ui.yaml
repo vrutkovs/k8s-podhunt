@@ -32,7 +32,7 @@ spec:
         deploymentconfig: hunt-ui
     spec:
       containers:
-        - image: 'image-registry.openshift-image-registry.svc:5000/pod-hunt/hunt-ui:bin'
+        - image: 'image-registry.openshift-image-registry.svc:5000/pod-hunt/hunt-ui:webserver'
           imagePullPolicy: Always
           name: hunt-ui
           ports:
