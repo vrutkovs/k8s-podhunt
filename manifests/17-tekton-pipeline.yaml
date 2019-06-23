@@ -7,50 +7,44 @@ spec:
   - name: build-ui-src
     taskRef:
       name: openshift-client
-    resources:
-      inputs:
-        - name: ARGS
-          value: start-build hunt-ui-src --wait
+    params:
+    - name: ARGS
+      value: start-build hunt-ui-src --wait
   - name: build-ui-bin
     taskRef:
       name: openshift-client
-    resources:
-      inputs:
-        - name: ARGS
-          value: start-build hunt-ui-bin --wait
+    params:
+    - name: ARGS
+      value: start-build hunt-ui-bin --wait
     runAfter:
     - build-ui-src
   - name: build-backend-src
     taskRef:
       name: openshift-client
-    resources:
-      inputs:
-        - name: ARGS
-          value: start-build hunt-backend-src --wait
+    params:
+    - name: ARGS
+      value: start-build hunt-backend-src --wait
   - name: build-backend-bin
     taskRef:
       name: openshift-client
-    resources:
-      inputs:
-        - name: ARGS
-          value: start-build hunt-backend-bin --wait
+    params:
+    - name: ARGS
+      value: start-build hunt-backend-bin --wait
     runAfter:
     - build-backend-src
   - name: rollout-ui
     taskRef:
       name: openshift-client
-    resources:
-      inputs:
-        - name: ARGS
-          value: rollout latest hunt-ui
+    params:
+    - name: ARGS
+      value: rollout latest hunt-ui
     runAfter:
     - build-ui-bin
   - name: rollout-backend
     taskRef:
       name: openshift-client
-    resources:
-      inputs:
-        - name: ARGS
-          value: rollout latest hunt-backend
+    params:
+    - name: ARGS
+      value: rollout latest hunt-backend
     runAfter:
     - build-backend-bin
