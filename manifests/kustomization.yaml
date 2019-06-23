@@ -1,0 +1,19 @@
+namespace: pod-hunt
+commonLabels:
+  app: pod-hunt
+resources:
+  - 01_namespace.yaml
+  - 02_imagestream_hunt-backend.yaml
+  - 03_imagestream_hunt-ui.yaml
+  - 04_buildconfig_hunt-ui-src.yaml
+  - 05_buildconfig_hunt-ui-nginx.yaml
+  - 06_buildconfig_hunt-backend-src.yaml
+  - 07_buildconfig_hunt-backend-bin.yaml
+  - 08-deployment-hunt-ui.yaml
+  - 09_deployment_hunt-backend.yaml
+  - 10-service-ui.yaml
+  - 11-service-backend.yaml
+  - 12-route-backend.yaml
+  - 13-route-ui.yaml
+  - 14-clusterrolebinding.yaml
+  - 15-serviceaccount.yaml

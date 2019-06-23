@@ -1,0 +1,5 @@
+namespace: pod-hunt
+bases:
+- manifests/
+patchesStrategicMerge:
+- kustomize-route.yaml

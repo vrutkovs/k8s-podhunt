@@ -1,0 +1,13 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: ui
+spec:
+  host: podhunt.apps.vrutkovs.devcluster.openshift.com
+---
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: backend
+spec:
+  host: podhunt.apps.vrutkovs.devcluster.openshift.com
