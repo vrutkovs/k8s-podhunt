@@ -33,10 +33,15 @@ func getRandomNamespace(c *k8s.Clientset) (string, error) {
 	if err != nil || nms.Items == nil || len(nms.Items) == 0 {
 		return "", fmt.Errorf("Failed to list namespaces: %v", err)
 	}
+	log.Println(fmt.Sprintf("found %d namespaces", len(nms.Items)))
 	namespaces := make([]string, len(nms.Items))
 	for _, n := range nms.Items {
+		log.Println(fmt.Sprintf("verifying namespace: %v", n.Namespace))
 		if sort.SearchStrings(blackListedNamespaces, n.Namespace) >= len(blackListedNamespaces) {
+			log.Println("+")
 			namespaces = append(namespaces, n.Namespace)
+		} else {
+			log.Println("-")
 		}
 	}
 	randomNamespace := namespaces[rand.Intn(len(namespaces))]
