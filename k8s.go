@@ -12,7 +12,11 @@ import (
 	"k8s.io/client-go/rest"
 )
 
-var blackListedNamespaces = []string{"openshift-etcd", "openshift-ingress", "openshift-cluster-version"}
+var blackListedNamespaces = []string{
+	"openshift-etcd",
+	"openshift-ingress",
+	"openshift-cluster-version",
+}
 
 func inClusterLogin() (*k8s.Clientset, error) {
 	// creates the in-cluster config
@@ -38,10 +42,7 @@ func getRandomNamespace(c *k8s.Clientset) (string, error) {
 		log.Println(fmt.Sprintf("verifying namespace: %v", n))
 		log.Println(fmt.Sprintf("name: %v", n.Name))
 		if sort.SearchStrings(blackListedNamespaces, n.Name) >= len(blackListedNamespaces) {
-			log.Println("+")
 			namespaces = append(namespaces, n.Name)
-		} else {
-			log.Println("-")
 		}
 	}
 	randomNamespace := namespaces[rand.Intn(len(namespaces))]
