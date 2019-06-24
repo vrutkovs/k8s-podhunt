@@ -34,8 +34,7 @@ spec:
   successfulBuildsHistoryLimit: 5
   triggers:
   - type: ImageChange
-  - type: ImageChange
-    imageChange:
+  - imageChange:
       from:
         kind: "ImageStreamTag"
         name: "hunt-ui:src"
