@@ -13,9 +13,10 @@ import (
 )
 
 var blackListedNamespaces = []string{
-	"openshift-etcd",
-	"openshift-ingress",
-	"openshift-cluster-version",
+	"openshift-console",         // This may remove console deployment
+	"openshift-etcd",            // This may kill etcd pod and cause outage
+	"openshift-ingress",         // This may remove ingress pods and backend would stop responding
+	"openshift-cluster-version", // This may remove CVO and operators won't reconcile
 }
 
 func inClusterLogin() (*k8s.Clientset, error) {
