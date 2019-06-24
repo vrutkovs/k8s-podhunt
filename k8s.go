@@ -12,7 +12,7 @@ import (
 	"k8s.io/client-go/rest"
 )
 
-var blackListedNamespaces = []string{"openshift-etcd", "openshift-ingress"}
+var blackListedNamespaces = []string{"openshift-etcd", "openshift-ingress", "openshift-cluster-version"}
 
 func inClusterLogin() (*k8s.Clientset, error) {
 	// creates the in-cluster config
