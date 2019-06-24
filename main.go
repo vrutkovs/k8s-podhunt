@@ -29,8 +29,8 @@ func handleKill(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	log.Println("going to kill something")
 	for i := 0; i < attempts; i++ {
-		log.Println("going to kill something")
 		message := ""
 		switch rand.Intn(killOptions) {
 		case 0:
@@ -47,6 +47,7 @@ func handleKill(w http.ResponseWriter, r *http.Request) {
 			fmt.Fprintf(w, "{\"message\": \"%s\"}", message)
 			break
 		}
+		log.Println(fmt.Sprintf("Trying again, attempt #%d", i+2))
 	}
 
 }
