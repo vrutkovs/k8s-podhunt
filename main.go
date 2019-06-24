@@ -2,14 +2,17 @@ package main
 
 import (
 	"fmt"
-	"math/rand"
 	"io"
 	"log"
+	"math/rand"
 	"net/http"
 	"os"
 )
 
-const killOptions = 3
+const (
+	killOptions = 3
+	attempts    = 10
+)
 
 func handleKill(w http.ResponseWriter, r *http.Request) {
 	_, err := io.Copy(os.Stdout, r.Body)
@@ -26,23 +29,26 @@ func handleKill(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	log.Println("going to kill something")
-	message := ""
+	for i := 0; i < attempts; i++ {
+		log.Println("going to kill something")
+		message := ""
+		switch rand.Intn(killOptions) {
+		case 0:
+			message, err = killRandomPod(c)
+		case 1:
+			message, err = killRandomDeployment(c)
+		case 2:
+			message, err = killRandomStatefulSet(c)
+		default:
+			message, err = killRandomPod(c)
+		}
+		log.Println(fmt.Sprintf("err: %v, message: %s", err, message))
+		if err == nil {
+			fmt.Fprintf(w, "{\"message\": \"%s\"}", message)
+			break
+		}
+	}
 
-	switch rand.Intn(killOptions) {
-	case 0:
-		message, err = killRandomPod(c)
-	case 1:
-		message, err = killRandomDeployment(c)
-	case 2:
-		message, err = killRandomStatefulSet(c)
-	default:
-		message, err = killRandomPod(c)
-	}
-	log.Println(fmt.Sprintf("err: %v, message: %s", err, message))
-	if err == nil {
-		fmt.Fprintf(w, "{\"message\": \"%s\"}", message)
-	}
 }
 
 func main() {
