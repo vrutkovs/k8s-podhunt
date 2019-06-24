@@ -66,9 +66,8 @@ func killRandomPod(c *k8s.Clientset) (string, error) {
 	if err := c.CoreV1().Pods(randomPod.Namespace).Delete(randomPod.Name, &metav1.DeleteOptions{}); err != nil {
 		return "", fmt.Errorf("Failed to kill pods: %v", err)
 	}
-	message := fmt.Sprintf("Killed pod %s in namespace %s", randomPod.Name, randomPod.Namespace)
-	log.Println(message)
-	return message, nil
+	return fmt.Sprintf("Killed pod %s in namespace %s", randomPod.Name, randomPod.Namespace)
+	log.Println(message), nil
 }
 
 func killRandomDeployment(c *k8s.Clientset) (string, error) {
@@ -94,9 +93,7 @@ func killRandomDeployment(c *k8s.Clientset) (string, error) {
 	if err := c.AppsV1().Deployments(randomDeployment.Namespace).Delete(randomDeployment.Name, &metav1.DeleteOptions{}); err != nil {
 		return "", fmt.Errorf("Failed to delete deployment: %v", err)
 	}
-	message := fmt.Sprintf("Killed deployment %s in namespace %s", randomDeployment.Name, randomDeployment.Namespace)
-	log.Println(message)
-	return message, nil
+	return fmt.Sprintf("Killed deployment %s in namespace %s", randomDeployment.Name, randomDeployment.Namespace), nil
 }
 
 func killRandomStatefulSet(c *k8s.Clientset) (string, error) {
@@ -122,7 +119,5 @@ func killRandomStatefulSet(c *k8s.Clientset) (string, error) {
 	if err := c.AppsV1().StatefulSets(randomStatefulSet.Namespace).Delete(randomStatefulSet.Name, &metav1.DeleteOptions{}); err != nil {
 		return "", fmt.Errorf("Failed to kill statefulset: %v", err)
 	}
-	message := fmt.Sprintf("Killed statefulset %s in namespace %s", randomStatefulSet.Name, randomStatefulSet.Namespace)
-	log.Println(message)
-	return message, nil
+	return fmt.Sprintf("Killed statefulset %s in namespace %s", randomStatefulSet.Name, randomStatefulSet.Namespace), nil
 }
