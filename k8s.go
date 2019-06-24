@@ -49,7 +49,6 @@ func getRandomNamespace(c *k8s.Clientset) (string, error) {
 
 	// Get a slice of keys
 	keys := reflect.ValueOf(namespacesMap).MapKeys()
-	log.Println(fmt.Sprintf("filtered namespaces: %v", keys))
 	randomNamespace := keys[rand.Intn(len(keys))].String()
 	log.Println(fmt.Sprintf("random namespace: %v", randomNamespace))
 	return randomNamespace, nil
