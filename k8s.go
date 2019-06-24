@@ -27,11 +27,11 @@ func inClusterLogin() (*k8s.Clientset, error) {
 	return k8s.NewForConfig(config)
 }
 
-func getAvailableNamespaces(c *k8s.Clientset) ([]string, error) {
+func getRandomNamespace(c *k8s.Clientset) (string, error) {
 	log.Println("Fetching available namespaces")
 	nms, err := c.CoreV1().Namespaces().List(metav1.ListOptions{})
 	if err != nil || nms.Items == nil || len(nms.Items) == 0 {
-		return []string{}, fmt.Errorf("Failed to list namespaces: %v", err)
+		return "", fmt.Errorf("Failed to list namespaces: %v", err)
 	}
 	namespaces := make([]string, len(nms.Items))
 	for _, n := range nms.Items {
@@ -39,17 +39,18 @@ func getAvailableNamespaces(c *k8s.Clientset) ([]string, error) {
 			namespaces = append(namespaces, n.Namespace)
 		}
 	}
-	return namespaces, nil
+	randomNamespace := namespaces[rand.Intn(len(namespaces))]
+	log.Println(fmt.Sprintf("random namespace: %s", randomNamespace))
+	return randomNamespace, nil
 }
 
 func killRandomPod(c *k8s.Clientset) (string, error) {
 	log.Println("Killing random pod")
-
-	namespaces, err := getAvailableNamespaces(c)
+	// Find random namespace
+	randomNamespace, err := getRandomNamespace(c)
 	if err != nil {
 		return "", fmt.Errorf("Failed to fetch available namespaces: %v", err)
 	}
-	randomNamespace := namespaces[rand.Intn(len(namespaces))]
 
 	// Find random pod
 	pods, err := c.CoreV1().Pods(randomNamespace).List(metav1.ListOptions{})
@@ -73,11 +74,11 @@ func killRandomPod(c *k8s.Clientset) (string, error) {
 func killRandomDeployment(c *k8s.Clientset) (string, error) {
 	log.Println("Killing random Deployment")
 
-	namespaces, err := getAvailableNamespaces(c)
+	// Find random namespace
+	randomNamespace, err := getRandomNamespace(c)
 	if err != nil {
 		return "", fmt.Errorf("Failed to fetch available namespaces: %v", err)
 	}
-	randomNamespace := namespaces[rand.Intn(len(namespaces))]
 
 	// Find random pod
 	deployments, err := c.AppsV1().Deployments(randomNamespace).List(metav1.ListOptions{})
@@ -101,11 +102,11 @@ func killRandomDeployment(c *k8s.Clientset) (string, error) {
 func killRandomStatefulSet(c *k8s.Clientset) (string, error) {
 	log.Println("Killing random StatefulSet")
 
-	namespaces, err := getAvailableNamespaces(c)
+	// Find random namespace
+	randomNamespace, err := getRandomNamespace(c)
 	if err != nil {
-		return "", fmt.Errorf("Failed to list available namespaces: %v", err)
+		return "", fmt.Errorf("Failed to fetch available namespaces: %v", err)
 	}
-	randomNamespace := namespaces[rand.Intn(len(namespaces))]
 
 	// Find random pod
 	statefulSets, err := c.AppsV1().StatefulSets(randomNamespace).List(metav1.ListOptions{})
