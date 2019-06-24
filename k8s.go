@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 	"math/rand"
-	"sort"
+	"reflect"
 	"time"
 
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -37,15 +37,20 @@ func getRandomNamespace(c *k8s.Clientset) (string, error) {
 	if err != nil || nms.Items == nil || len(nms.Items) == 0 {
 		return "", fmt.Errorf("Failed to list namespaces: %v", err)
 	}
+
+	namespacesMap := map[string]bool{}
 	namespaces := []string{}
 	for _, n := range nms.Items {
-		log.Println(fmt.Sprintf("verifying namespace: %v", n))
-		log.Println(fmt.Sprintf("name: %v", n.Name))
-		if sort.SearchStrings(blackListedNamespaces, n.Name) >= len(blackListedNamespaces) {
-			namespaces = append(namespaces, n.Name)
-		}
+		namespacesMap[n.Name] = true
 	}
-	randomNamespace := namespaces[rand.Intn(len(namespaces))]
+	// Remove blacklisted namespaces
+	for n := range blackListedNamespaces {
+		delete(namespacesMap, blackListedNamespaces[n])
+	}
+
+	// Get a slice of keys
+	keys := reflect.ValueOf(namespacesMap).MapKeys()
+	randomNamespace := namespaces[rand.Intn(len(keys))]
 	log.Println(fmt.Sprintf("random namespace: %v", randomNamespace))
 	return randomNamespace, nil
 }
