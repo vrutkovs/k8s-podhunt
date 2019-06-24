@@ -37,12 +37,10 @@ func getRandomNamespace(c *k8s.Clientset) (string, error) {
 	for _, n := range nms.Items {
 		if sort.SearchStrings(blackListedNamespaces, n.Namespace) >= len(blackListedNamespaces) {
 			namespaces = append(namespaces, n.Namespace)
-		} else {
-			log.Println(fmt.Sprintf("skipping blacklisted namespace: %s", n.Namespace))
 		}
 	}
 	randomNamespace := namespaces[rand.Intn(len(namespaces))]
-	log.Println(fmt.Sprintf("random namespace: %s", randomNamespace))
+	log.Println(fmt.Sprintf("random namespace: %v", randomNamespace))
 	return randomNamespace, nil
 }
 
