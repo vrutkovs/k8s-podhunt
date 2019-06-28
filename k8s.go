@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"math/rand"
+	"os"
 	"reflect"
 	"time"
 
@@ -33,6 +34,11 @@ func inClusterLogin() (*k8s.Clientset, error) {
 }
 
 func getRandomNamespace(c *k8s.Clientset) (string, error) {
+	if len(os.Getenv("NAMESPACE")) != 0 {
+		namespace := os.Getenv("NAMESPACE")
+		log.Println(fmt.Sprintf("Namespace override found: %s", namespace))
+		return namespace, nil
+	}
 	log.Println("Fetching available namespaces")
 	nms, err := c.CoreV1().Namespaces().List(metav1.ListOptions{})
 	if err != nil || nms.Items == nil || len(nms.Items) == 0 {
