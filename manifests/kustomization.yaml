@@ -1,6 +1,4 @@
 namespace: pod-hunt
-commonLabels:
-  app: pod-hunt
 resources:
   - 01_namespace.yaml
   - 02_imagestream_hunt-backend.yaml
