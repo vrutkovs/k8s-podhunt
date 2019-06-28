@@ -83,7 +83,8 @@ func killRandomPod(c *k8s.Clientset) (string, error) {
 	}
 	randomPod := pods.Items[rand.Intn(len(pods.Items))]
 
-	if randomPod.Status.Phase != coreapi.PodRunning || randomPod.Status.Phase != coreapi.PodPending {
+	switch randomPod.Status.Phase {
+	case coreapi.PodFailed, coreapi.PodSucceeded, coreapi.PodUnknown:
 		return "", fmt.Errorf("Random pod %s is in phase '%s'", randomPod.Name, randomPod.Status.Phase)
 	}
 
