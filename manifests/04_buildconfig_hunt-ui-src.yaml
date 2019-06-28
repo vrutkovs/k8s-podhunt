@@ -3,7 +3,7 @@ kind: BuildConfig
 metadata:
   labels:
     app: hunt-ui
-  name: pod-hunt-src
+  name: hunt-ui-src
   namespace: pod-hunt
 spec:
   failedBuildsHistoryLimit: 5
