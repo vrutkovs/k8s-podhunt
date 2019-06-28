@@ -15,10 +15,9 @@ import (
 )
 
 var blackListedNamespaces = []string{
-	"openshift-console",         // This may remove console deployment
-	"openshift-etcd",            // This may kill etcd pod and cause outage
-	"openshift-ingress",         // This may remove ingress pods and backend would stop responding
-	"openshift-cluster-version", // This may remove CVO and operators won't reconcile
+	"openshift-console", // This may remove console deployment
+	"openshift-etcd",    // This may kill etcd pod and cause outage
+	"openshift-ingress", // This may remove ingress pods and backend would stop responding
 }
 
 func inClusterLogin() (*k8s.Clientset, error) {
@@ -57,6 +56,9 @@ func getRandomNamespace(c *k8s.Clientset) (string, error) {
 			delete(namespacesMap, blackListedNamespaces[n])
 		}
 	}
+
+	// Leave CVO alone
+	delete(namespacesMap, "openshift-cluster-version")
 
 	// Get a slice of keys
 	keys := reflect.ValueOf(namespacesMap).MapKeys()
