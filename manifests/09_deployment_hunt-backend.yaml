@@ -28,7 +28,7 @@ spec:
     metadata:
       creationTimestamp: null
       labels:
-        app: hunt-backend
+        app: pod-hunt
         deploymentconfig: hunt-backend
     spec:
       containers:
