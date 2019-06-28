@@ -50,9 +50,12 @@ func getRandomNamespace(c *k8s.Clientset) (string, error) {
 	for _, n := range nms.Items {
 		namespacesMap[n.Name] = true
 	}
-	// Remove blacklisted namespaces
-	for n := range blackListedNamespaces {
-		delete(namespacesMap, blackListedNamespaces[n])
+
+	if len(os.Getenv("NO_BLACKLIST")) != 0 {
+		// Remove blacklisted namespaces
+		for n := range blackListedNamespaces {
+			delete(namespacesMap, blackListedNamespaces[n])
+		}
 	}
 
 	// Get a slice of keys
