@@ -8,6 +8,7 @@ import (
 	"reflect"
 	"time"
 
+	coreapi "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	k8s "k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/rest"
@@ -78,6 +79,10 @@ func killRandomPod(c *k8s.Clientset) (string, error) {
 		return "", fmt.Errorf("No pods fetched")
 	}
 	randomPod := pods.Items[rand.Intn(len(pods.Items))]
+
+	if randomPod.Status.Phase != coreapi.PodRunning || randomPod.Status.Phase != coreapi.PodPending {
+		return "", fmt.Errorf("Random pod %s is in phase '%s'", randomPod.Name, randomPod.Status.Phase)
+	}
 
 	// Kill kill kill
 	if err := c.CoreV1().Pods(randomPod.Namespace).Delete(randomPod.Name, &metav1.DeleteOptions{}); err != nil {
