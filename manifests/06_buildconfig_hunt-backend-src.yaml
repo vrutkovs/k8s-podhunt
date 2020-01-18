@@ -24,7 +24,7 @@ spec:
     sourceStrategy:
       from:
         kind: ImageStreamTag
-        name: hunt-backend:golang1.11
+        name: hunt-backend:golang1.13
     type: Source
   successfulBuildsHistoryLimit: 5
   triggers:
