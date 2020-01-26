@@ -20,6 +20,8 @@ var blackListedNamespaces = []string{
 	"openshift-ingress", // This may remove ingress pods and backend would stop responding
 }
 
+var nsList = []string{}
+
 func inClusterLogin() (*k8s.Clientset, error) {
 	// creates the in-cluster config
 	config, err := rest.InClusterConfig()
@@ -33,15 +35,16 @@ func inClusterLogin() (*k8s.Clientset, error) {
 	return k8s.NewForConfig(config)
 }
 
-func getRandomNamespace(c *k8s.Clientset) (string, error) {
+func setNamespacesList(c *k8s.Clientset) error {
 	if namespace, ok := os.LookupEnv("NAMESPACE"); ok {
 		log.Println(fmt.Sprintf("Namespace override found: %s", namespace))
-		return namespace, nil
+		nsList = []string{namespace}
+		return nil
 	}
 	log.Println("Fetching available namespaces")
 	nms, err := c.CoreV1().Namespaces().List(metav1.ListOptions{})
 	if err != nil || nms.Items == nil || len(nms.Items) == 0 {
-		return "", fmt.Errorf("Failed to list namespaces: %v", err)
+		return fmt.Errorf("Failed to list namespaces: %v", err)
 	}
 
 	namespacesMap := map[string]bool{}
@@ -60,8 +63,22 @@ func getRandomNamespace(c *k8s.Clientset) (string, error) {
 	delete(namespacesMap, "openshift-cluster-version")
 
 	// Get a slice of keys
-	keys := reflect.ValueOf(namespacesMap).MapKeys()
-	randomNamespace := keys[rand.Intn(len(keys))].String()
+	for _, key := range reflect.ValueOf(namespacesMap).MapKeys() {
+		nsList = append(nsList, key.String())
+	}
+
+	return nil
+}
+
+func getRandomNamespace(c *k8s.Clientset) (string, error) {
+	if len(nsList) == 0 {
+		err := setNamespacesList(c)
+		if err != nil {
+			return "", fmt.Errorf("Failed to fetch namespaces list: %v", err)
+		}
+	}
+
+	randomNamespace := nsList[rand.Intn(len(nsList))]
 	log.Println(fmt.Sprintf("random namespace: %v", randomNamespace))
 	return randomNamespace, nil
 }
