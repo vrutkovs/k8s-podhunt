@@ -34,8 +34,7 @@ func inClusterLogin() (*k8s.Clientset, error) {
 }
 
 func getRandomNamespace(c *k8s.Clientset) (string, error) {
-	if len(os.Getenv("NAMESPACE")) != 0 {
-		namespace := os.Getenv("NAMESPACE")
+	if namespace, ok := os.LookupEnv("NAMESPACE"); ok {
 		log.Println(fmt.Sprintf("Namespace override found: %s", namespace))
 		return namespace, nil
 	}
@@ -50,7 +49,7 @@ func getRandomNamespace(c *k8s.Clientset) (string, error) {
 		namespacesMap[n.Name] = true
 	}
 
-	if len(os.Getenv("NO_BLACKLIST")) != 0 {
+	if _, ok := os.LookupEnv("NO_BLACKLIST"); !ok {
 		// Remove blacklisted namespaces
 		for n := range blackListedNamespaces {
 			delete(namespacesMap, blackListedNamespaces[n])
