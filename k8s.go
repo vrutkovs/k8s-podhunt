@@ -66,6 +66,7 @@ func setNamespacesList(c *k8s.Clientset) error {
 	for _, key := range reflect.ValueOf(namespacesMap).MapKeys() {
 		nsList = append(nsList, key.String())
 	}
+	log.Printf("Namespaces: %v\n", nsList)
 
 	return nil
 }
