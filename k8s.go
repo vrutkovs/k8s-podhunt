@@ -18,6 +18,7 @@ var blackListedNamespaces = []string{
 	"openshift-console", // This may remove console deployment
 	"openshift-etcd",    // This may kill etcd pod and cause outage
 	"openshift-ingress", // This may remove ingress pods and backend would stop responding
+	"pod-hunt",          // Don't kill the app itself
 }
 
 var nsList = []string{}
