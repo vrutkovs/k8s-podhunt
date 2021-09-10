@@ -4,7 +4,6 @@ metadata:
   name: backend
   namespace: pod-hunt
 spec:
-  host: podhunt.apps.vrutkovs-k8s-podhunt.devcluster.openshift.com
   subdomain: ''
   path: /kill
   to:

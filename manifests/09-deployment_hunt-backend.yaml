@@ -4,7 +4,7 @@ metadata:
   annotations:
     image.openshift.io/triggers: |
       [
-        {"from":{"kind":"ImageStreamTag","name":"hunt-backend:bin"},"fieldPath":"spec.template.spec.containers[?(@.name==\"hunt-backend\")].image"}
+        {"from":{"kind":"ImageStreamTag","name":"hunt-backend:latest"},"fieldPath":"spec.template.spec.containers[?(@.name==\"hunt-backend\")].image"}
       ]
   labels:
     app: hunt-backend
@@ -56,6 +56,6 @@ spec:
           - hunt-backend
         from:
           kind: ImageStreamTag
-          name: 'hunt-backend:bin'
+          name: 'hunt-backend:latest'
       type: ImageChange
     - type: ConfigChange

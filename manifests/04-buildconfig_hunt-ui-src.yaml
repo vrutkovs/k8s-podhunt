@@ -6,8 +6,6 @@ metadata:
   name: hunt-ui-src
   namespace: pod-hunt
 spec:
-  failedBuildsHistoryLimit: 5
-  nodeSelector: null
   output:
     to:
       kind: ImageStreamTag
@@ -24,12 +22,8 @@ spec:
     sourceStrategy:
       from:
         kind: ImageStreamTag
-        name: hunt-ui:nodejs10
+        name: hunt-ui:nodejs
     type: Source
-  successfulBuildsHistoryLimit: 5
   triggers:
-  - github:
-      secret: 7b6c52a8146202e3
-    type: GitHub
   - type: ImageChange
   - type: ConfigChange

@@ -3,7 +3,7 @@ kind: BuildConfig
 metadata:
   labels:
     app: hunt-backend
-  name: hunt-backend-src
+  name: hunt-backend
   namespace: pod-hunt
 spec:
   failedBuildsHistoryLimit: 5
@@ -11,7 +11,7 @@ spec:
   output:
     to:
       kind: ImageStreamTag
-      name: hunt-backend:src
+      name: hunt-backend:latest
   postCommit: {}
   resources: {}
   runPolicy: Serial
@@ -21,15 +21,11 @@ spec:
       uri: https://github.com/vrutkovs/k8s-podhunt
     type: Git
   strategy:
-    sourceStrategy:
+    dockerStrategy:
       from:
         kind: ImageStreamTag
-        name: hunt-backend:golang1.13
-    type: Source
-  successfulBuildsHistoryLimit: 5
+        name: hunt-backend:ubi8
+    type: Docker
   triggers:
   - type: ImageChange
   - type: ConfigChange
-  - github:
-      secret: dbb3f5b90a1a1283
-    type: GitHub

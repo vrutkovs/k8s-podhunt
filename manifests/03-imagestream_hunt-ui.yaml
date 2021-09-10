@@ -11,14 +11,14 @@ spec:
   tags:
   - from:
       kind: DockerImage
-      name: registry.access.redhat.com/ubi8/nodejs-10
-    name: nodejs10
+      name: registry.access.redhat.com/ubi8/nodejs-14
+    name: nodejs
     referencePolicy:
       type: Local
   - from:
       kind: DockerImage
-      name: docker.io/centos/nginx-112-centos7
-    name: nginx1.12
+      name: registry.access.redhat.com/ubi8/nginx-118
+    name: nginx
     referencePolicy:
       type: Local
   - name: src

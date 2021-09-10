@@ -6,14 +6,10 @@ metadata:
   name: hunt-ui-nginx
   namespace: pod-hunt
 spec:
-  failedBuildsHistoryLimit: 5
-  nodeSelector: null
   output:
     to:
       kind: ImageStreamTag
       name: "hunt-ui:webserver"
-  postCommit: {}
-  resources: {}
   runPolicy: Serial
   source:
     images:
@@ -29,9 +25,8 @@ spec:
     sourceStrategy:
       from:
         kind: ImageStreamTag
-        name: "hunt-ui:nginx1.12"
+        name: "hunt-ui:nginx"
     type: Source
-  successfulBuildsHistoryLimit: 5
   triggers:
   - type: ImageChange
   - imageChange:
