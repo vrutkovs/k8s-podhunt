@@ -9,21 +9,25 @@ spec:
   lookupPolicy:
     local: false
   tags:
-  - from:
-      kind: DockerImage
-      name: registry.access.redhat.com/ubi8/nodejs-14
-    name: nodejs
-    referencePolicy:
-      type: Local
-  - from:
+  - name: nginx
+    from:
       kind: DockerImage
       name: registry.access.redhat.com/ubi8/nginx-118
-    name: nginx
+    importPolicy: {}
+    referencePolicy:
+      type: Local
+  - name: nodejs
+    from:
+      kind: DockerImage
+      name: registry.access.redhat.com/ubi8/nodejs-14
+    importPolicy: {}
     referencePolicy:
       type: Local
   - name: src
+    importPolicy: {}
     referencePolicy:
       type: Source
   - name: webserver
+    importPolicy: {}
     referencePolicy:
       type: Source

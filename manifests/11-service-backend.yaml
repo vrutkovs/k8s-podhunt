@@ -5,7 +5,7 @@ metadata:
   namespace: pod-hunt
 spec:
   selector:
-    deploymentconfig: hunt-backend
+    app: hunt-backend
   ports:
     - protocol: TCP
       port: 8080

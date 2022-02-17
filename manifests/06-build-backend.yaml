@@ -1,0 +1,15 @@
+apiVersion: build.dev/v1alpha1
+kind: Build
+metadata:
+  name: backend-build
+  namespace: pod-hunt
+spec:
+  source:
+    url: https://github.com/vrutkovs/k8s-podhunt
+    revision: master
+  strategy:
+    name: buildah
+    kind: ClusterBuildStrategy
+  dockerfile: Dockerfile
+  output:
+    image: image-registry.openshift-image-registry.svc:5000/pod-hunt/hunt-backend

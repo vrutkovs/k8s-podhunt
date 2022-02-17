@@ -1,5 +1,5 @@
-apiVersion: apps.openshift.io/v1
-kind: DeploymentConfig
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   annotations:
     image.openshift.io/triggers: |
@@ -13,26 +13,21 @@ metadata:
 spec:
   replicas: 1
   selector:
-    deploymentconfig: hunt-backend
+    matchLabels:
+      app: hunt-backend
   strategy:
-    activeDeadlineSeconds: 21600
-    resources: {}
-    rollingParams:
-      intervalSeconds: 1
-      maxSurge: 25%
+    type: RollingUpdate
+    rollingUpdate:
       maxUnavailable: 25%
-      timeoutSeconds: 600
-      updatePeriodSeconds: 1
-    type: Rolling
+      maxSurge: 25%
   template:
     metadata:
       creationTimestamp: null
       labels:
-        app: pod-hunt
-        deploymentconfig: hunt-backend
+        app: hunt-backend
     spec:
       containers:
-        - image: ''
+        - image: ' '
           imagePullPolicy: Always
           name: hunt-backend
           ports:
@@ -48,14 +43,3 @@ spec:
       serviceAccount: ripper
       serviceAccountName: ripper
       terminationGracePeriodSeconds: 30
-  test: false
-  triggers:
-    - imageChangeParams:
-        automatic: true
-        containerNames:
-          - hunt-backend
-        from:
-          kind: ImageStreamTag
-          name: 'hunt-backend:latest'
-      type: ImageChange
-    - type: ConfigChange

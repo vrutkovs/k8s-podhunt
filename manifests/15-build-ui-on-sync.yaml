@@ -1,0 +1,14 @@
+---
+apiVersion: build.dev/v1alpha1
+kind: BuildRun
+metadata:
+  generateName: ui-buildrun-
+  namespace: pod-hunt
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+spec:
+  buildRef:
+    name: ui-build
+  serviceAccount:
+    name: pipeline

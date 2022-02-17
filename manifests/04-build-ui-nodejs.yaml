@@ -1,0 +1,16 @@
+apiVersion: build.dev/v1alpha1
+kind: Build
+metadata:
+  name: ui-build
+  namespace: pod-hunt
+spec:
+  source:
+    url: https://github.com/vrutkovs/DuckHunt-JS
+    revision: master
+  strategy:
+    name: source-to-image
+    kind: ClusterBuildStrategy
+  builder:
+    image: image-registry.openshift-image-registry.svc:5000/pod-hunt/hunt-ui:nodejs
+  output:
+    image: image-registry.openshift-image-registry.svc:5000/pod-hunt/hunt-ui:src
