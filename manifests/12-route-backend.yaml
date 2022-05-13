@@ -4,7 +4,6 @@ metadata:
   name: backend
   namespace: pod-hunt
 spec:
-  subdomain: ''
   path: /kill
   to:
     kind: Service

@@ -4,7 +4,6 @@ metadata:
   name: ui
   namespace: pod-hunt
 spec:
-  subdomain: ''
   to:
     kind: Service
     name: ui
