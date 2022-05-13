@@ -1,0 +1,10 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: ui
+  namespace: pod-hunt
+spec:
+  minAvailable: 33%
+  selector:
+    matchLabels:
+      deploymentconfig: hunt-ui
