@@ -49,7 +49,7 @@ spec:
       automatic: true
       from:
         kind: "ImageStreamTag"
-        name: "hunt-backend:bin"
+        name: "hunt-backend:latest"
       containerNames:
         - "hunt-backend"
   - type: ConfigChange
