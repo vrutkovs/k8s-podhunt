@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- 01-namespace.yaml
+- 02-imagestream_hunt-backend.yaml
+- 03-imagestream_hunt-ui.yaml
+- 04-buildconfig_hunt-ui-src.yaml
+- 05-buildconfig_hunt-ui-nginx.yaml
+- 06-buildconfig_hunt-backend-src.yaml
+- 07-serviceaccount.yaml
+- 08-deployment-hunt-ui.yaml
+- 09-deployment_hunt-backend.yaml
+- 10-service-ui.yaml
+- 11-service-backend.yaml
+- 12-route-backend.yaml
+- 13-route-ui.yaml
+- 14-clusterrolebinding.yaml
+- 15-pdb-ui.yaml
+- 16-pdb-backend.yaml
