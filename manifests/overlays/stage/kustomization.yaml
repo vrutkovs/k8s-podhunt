@@ -3,3 +3,23 @@ kind: Kustomization
 
 resources:
 - ../../base
+
+patchesJson6902:
+- patch: |-
+    - op: replace
+      path: /spec/host
+      value: duckhunt.apps.vrutkovs-stage.devcluster.openshift.com
+  target:
+    group: route.openshift.io
+    kind: Route
+    name: backend
+    version: v1
+- patch: |-
+    - op: replace
+      path: /spec/host
+      value: duckhunt.apps.vrutkovs-stage.devcluster.openshift.com
+  target:
+    group: route.openshift.io
+    kind: Route
+    name: ui
+    version: v1
