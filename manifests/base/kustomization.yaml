@@ -14,6 +14,5 @@ resources:
 - 11-service-backend.yaml
 - 12-route-backend.yaml
 - 13-route-ui.yaml
-- 14-clusterrolebinding.yaml
 - 15-pdb-ui.yaml
 - 16-pdb-backend.yaml
