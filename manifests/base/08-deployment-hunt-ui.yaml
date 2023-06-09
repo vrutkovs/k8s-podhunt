@@ -4,7 +4,6 @@ metadata:
   labels:
     component: backend
   name: hunt-ui
-  namespace: pod-hunt
 spec:
   replicas: 3
   selector:

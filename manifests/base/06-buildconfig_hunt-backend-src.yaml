@@ -4,7 +4,6 @@ metadata:
   labels:
     component: backend
   name: hunt-backend-src
-  namespace: pod-hunt
 spec:
   failedBuildsHistoryLimit: 5
   nodeSelector: null

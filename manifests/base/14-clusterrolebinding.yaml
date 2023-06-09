@@ -5,7 +5,7 @@ metadata:
 subjects:
   - kind: ServiceAccount
     name: ripper
-    namespace: pod-hunt
+    namespace: workload
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole

@@ -4,7 +4,6 @@ metadata:
   labels:
     component: ui
   name: hunt-ui-src
-  namespace: pod-hunt
 spec:
   output:
     to:

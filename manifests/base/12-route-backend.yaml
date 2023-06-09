@@ -2,7 +2,6 @@ kind: Route
 apiVersion: route.openshift.io/v1
 metadata:
   name: backend
-  namespace: pod-hunt
   labels:
     component: backend
 spec:
