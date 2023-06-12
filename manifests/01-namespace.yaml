@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: pod-hunt
-  annotations:
-    openshift.io/node-selector: ""
-  labels:
-    name: pod-hunt

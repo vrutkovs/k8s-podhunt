@@ -1,0 +1,21 @@
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  name: hunt-backend
+  labels:
+    component: backend
+spec:
+  lookupPolicy:
+    local: false
+  tags:
+  - name: latest
+    importPolicy: {}
+    referencePolicy:
+      type: Source
+  - from:
+      kind: DockerImage
+      name: registry.access.redhat.com/ubi8/ubi
+    name: ubi8
+    importPolicy: {}
+    referencePolicy:
+      type: Source

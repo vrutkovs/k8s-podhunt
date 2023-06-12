@@ -1,0 +1,32 @@
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  name: hunt-ui
+  labels:
+    component: ui
+spec:
+  lookupPolicy:
+    local: false
+  tags:
+  - from:
+      kind: DockerImage
+      name: registry.access.redhat.com/ubi8/nginx-118
+    name: nginx
+    importPolicy: {}
+    referencePolicy:
+      type: Local
+  - from:
+      kind: DockerImage
+      name: registry.access.redhat.com/ubi8/nodejs-14
+    name: nodejs
+    importPolicy: {}
+    referencePolicy:
+      type: Local
+  - name: src
+    importPolicy: {}
+    referencePolicy:
+      type: Source
+  - name: webserver
+    importPolicy: {}
+    referencePolicy:
+      type: Source

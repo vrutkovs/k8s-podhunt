@@ -1,0 +1,30 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  labels:
+    component: ui
+  name: hunt-ui-bin
+spec:
+  output:
+    to:
+      kind: ImageStreamTag
+      name: "hunt-ui:webserver"
+  runPolicy: Serial
+  source:
+    images:
+    - as: null
+      from:
+        kind: ImageStreamTag
+        name: "hunt-ui:src"
+      paths:
+      - destinationDir: .
+        sourcePath: /opt/app-root/src/dist/.
+    type: Image
+  strategy:
+    sourceStrategy:
+      from:
+        kind: ImageStreamTag
+        name: "hunt-ui:nginx"
+    type: Source
+  triggers:
+  - type: ConfigChange

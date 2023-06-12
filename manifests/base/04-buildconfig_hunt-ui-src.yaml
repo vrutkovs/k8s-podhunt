@@ -1,0 +1,27 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  labels:
+    component: ui
+  name: hunt-ui-src
+spec:
+  output:
+    to:
+      kind: ImageStreamTag
+      name: hunt-ui:src
+  postCommit: {}
+  resources: {}
+  runPolicy: Serial
+  source:
+    git:
+      ref: master
+      uri: https://github.com/vrutkovs/DuckHunt-JS
+    type: Git
+  strategy:
+    sourceStrategy:
+      from:
+        kind: ImageStreamTag
+        name: hunt-ui:nodejs
+    type: Source
+  triggers:
+  - type: ConfigChange
