@@ -6,4 +6,4 @@ spec:
   minAvailable: 33%
   selector:
     matchLabels:
-      deploymentconfig: hunt-backend
+      deployment: hunt-backend
