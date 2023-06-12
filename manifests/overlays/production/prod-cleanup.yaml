@@ -3,46 +3,42 @@ $patch: delete
 apiVersion: build.openshift.io/v1
 kind: BuildConfig
 metadata:
-  labels:
-    component: ui
   name: hunt-ui-src
 ---
 $patch: delete
 apiVersion: build.openshift.io/v1
 kind: BuildConfig
 metadata:
-  labels:
-    component: ui
   name: hunt-ui-bin
 ---
 $patch: delete
 apiVersion: build.openshift.io/v1
 kind: BuildConfig
 metadata:
-  labels:
-    component: backend
   name: hunt-backend-src
 ---
+$patch: delete
 apiVersion: image.openshift.io/v1
 kind: ImageStream
 metadata:
   name: hunt-ui
-  labels:
-    component: ui
-spec:
-  lookupPolicy:
-    local: false
-  $patch: delete
-  tags: []
 ---
+$patch: delete
 apiVersion: image.openshift.io/v1
 kind: ImageStream
 metadata:
   name: hunt-backend
-  labels:
-    component: backend
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hunt-ui
 spec:
-  lookupPolicy:
-    local: false
-  $patch: delete
-  tags: []
+  replicas: 0
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hunt-backend
+spec:
+  replicas: 0
