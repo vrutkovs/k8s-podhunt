@@ -2,14 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-- ../../base/02-imagestream_hunt-backend.yaml
-- ../../base/03-imagestream_hunt-ui.yaml
-- ../../base/07-serviceaccount.yaml
-- ../../base/08-deployment-hunt-ui.yaml
-- ../../base/09-deployment-hunt-backend.yaml
-- ../../base/10-service-ui.yaml
-- ../../base/11-service-backend.yaml
-- ../../base/12-route-backend.yaml
-- ../../base/13-route-ui.yaml
-- ../../base/15-pdb-ui.yaml
-- ../../base/15-pdb-backend.yaml
+- ../../base/
+
+patches:
+  - prod-cleanup.yaml
