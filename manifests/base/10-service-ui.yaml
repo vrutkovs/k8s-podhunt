@@ -4,7 +4,7 @@ metadata:
   name: ui
 spec:
   selector:
-    deploymentconfig: hunt-ui
+    deployment: hunt-ui
   ports:
     - protocol: TCP
       port: 8080
