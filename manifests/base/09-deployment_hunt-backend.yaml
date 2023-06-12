@@ -26,7 +26,7 @@ spec:
         app: pod-hunt
     spec:
       containers:
-        - image: ''
+        - image: 'ghcr.io/vrutkovs/k8s-podhunt-backend'
           imagePullPolicy: Always
           name: hunt-backend
           ports:
