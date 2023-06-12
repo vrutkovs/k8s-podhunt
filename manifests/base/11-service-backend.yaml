@@ -4,7 +4,7 @@ metadata:
   name: backend
 spec:
   selector:
-    deploymentconfig: hunt-backend
+    deployment: hunt-backend
   ports:
     - protocol: TCP
       port: 8080

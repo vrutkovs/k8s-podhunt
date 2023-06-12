@@ -1,55 +1,35 @@
-apiVersion: apps.openshift.io/v1
-kind: DeploymentConfig
+apiVersion: apps/v1
+kind: Deployment
 metadata:
+  annotations:
+    image.openshift.io/triggers: |-
+      [
+        {
+          "from": {
+            "kind": "ImageStreamTag",
+            "name": "hunt-backend:latest"
+          },
+          "fieldPath": "spec.template.spec.containers[0].image"
+        }
+      ]
   labels:
     component: backend
   name: hunt-backend
 spec:
   replicas: 3
   selector:
-    deploymentconfig: hunt-backend
-  strategy:
-    activeDeadlineSeconds: 21600
-    resources: {}
-    rollingParams:
-      intervalSeconds: 1
-      maxSurge: 25%
-      maxUnavailable: 25%
-      timeoutSeconds: 600
-      updatePeriodSeconds: 1
-    type: Rolling
+    matchLabels:
+      deployment: hunt-backend
   template:
     metadata:
-      creationTimestamp: null
       labels:
-        deploymentconfig: hunt-backend
+        deployment: hunt-backend
         app: pod-hunt
     spec:
       containers:
-        - image: ''
+        - image: 'ghcr.io/vrutkovs/k8s-podhunt-backend'
           imagePullPolicy: Always
           name: hunt-backend
           ports:
             - containerPort: 8080
               protocol: TCP
-          resources: {}
-          terminationMessagePath: /dev/termination-log
-          terminationMessagePolicy: File
-      dnsPolicy: ClusterFirst
-      restartPolicy: Always
-      schedulerName: default-scheduler
-      securityContext: {}
-      serviceAccount: ripper
-      serviceAccountName: ripper
-      terminationGracePeriodSeconds: 30
-  test: false
-  triggers:
-  - type: "ImageChange"
-    imageChangeParams:
-      automatic: true
-      from:
-        kind: "ImageStreamTag"
-        name: "hunt-backend:latest"
-      containerNames:
-        - "hunt-backend"
-  - type: ConfigChange

@@ -1,53 +1,35 @@
-apiVersion: apps.openshift.io/v1
-kind: DeploymentConfig
+apiVersion: apps/v1
+kind: Deployment
 metadata:
+  annotations:
+    image.openshift.io/triggers: |-
+      [
+        {
+          "from": {
+            "kind": "ImageStreamTag",
+            "name": "hunt-ui:webserver"
+          },
+          "fieldPath": "spec.template.spec.containers[0].image"
+        }
+      ]
   labels:
-    component: backend
+    component: ui
   name: hunt-ui
 spec:
   replicas: 3
   selector:
-    deploymentconfig: hunt-ui
-  strategy:
-    activeDeadlineSeconds: 21600
-    resources: {}
-    rollingParams:
-      intervalSeconds: 1
-      maxSurge: 25%
-      maxUnavailable: 25%
-      timeoutSeconds: 600
-      updatePeriodSeconds: 1
-    type: Rolling
+    matchLabels:
+      deployment: hunt-ui
   template:
     metadata:
-      creationTimestamp: null
       labels:
-        deploymentconfig: hunt-ui
+        deployment: hunt-ui
         app: pod-hunt
     spec:
       containers:
-        - image: ''
+        - image: 'ghcr.io/vrutkovs/k8s-podhunt-ui'
           imagePullPolicy: Always
           name: hunt-ui
           ports:
             - containerPort: 8080
               protocol: TCP
-          resources: {}
-          terminationMessagePath: /dev/termination-log
-          terminationMessagePolicy: File
-      dnsPolicy: ClusterFirst
-      restartPolicy: Always
-      schedulerName: default-scheduler
-      securityContext: {}
-      terminationGracePeriodSeconds: 30
-  test: false
-  triggers:
-  - type: ConfigChange
-  - type: "ImageChange"
-    imageChangeParams:
-      automatic: true
-      from:
-        kind: "ImageStreamTag"
-        name: "hunt-ui:webserver"
-      containerNames:
-        - "hunt-ui"
