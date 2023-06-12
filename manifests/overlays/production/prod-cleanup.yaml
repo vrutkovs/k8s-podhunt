@@ -28,17 +28,3 @@ apiVersion: image.openshift.io/v1
 kind: ImageStream
 metadata:
   name: hunt-backend
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: hunt-ui
-spec:
-  replicas: 0
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: hunt-backend
-spec:
-  replicas: 0

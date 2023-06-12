@@ -3,7 +3,3 @@ kind: Kustomization
 
 resources:
 - ../production
-
-patches:
-  # Scale deployment to 0 as we'll rollout using Argo
-  - zero-replicas.yaml
