@@ -26,6 +26,7 @@ spec:
         deployment: hunt-backend
         app: pod-hunt
     spec:
+      serviceAccountName: ripper
       containers:
         - image: 'ghcr.io/vrutkovs/k8s-podhunt-backend'
           imagePullPolicy: Always
