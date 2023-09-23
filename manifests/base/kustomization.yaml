@@ -16,3 +16,4 @@ resources:
 - 13-route-ui.yaml
 - 15-pdb-ui.yaml
 - 16-pdb-backend.yaml
+- 17-ripper-cluster-admin.yaml
